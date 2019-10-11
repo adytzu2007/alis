@@ -48,7 +48,8 @@ Internet connection is required, with wireless WIFI connection see [Wireless_net
 ```
 # # Start the system with lastest Arch Linux installation media
 # loadkeys [keymap]
-# curl https://raw.githubusercontent.com/picodotdev/alis/master/download.sh | bash, or with URL shortener curl -sL https://bit.ly/2F3CATp | bash
+# curl https://raw.githubusercontent.com/adytzu2007/alis/master/download.sh > download.sh
+# bash download.sh
 # # Edit alis.conf and change variables values with your preferences
 # vim alis.conf
 # ./alis.sh
@@ -61,7 +62,8 @@ As another form of log.
 ```
 # # Start the system with lastest Arch Linux installation media
 # loadkeys [keymap]
-# curl https://raw.githubusercontent.com/picodotdev/alis/master/download.sh | bash, or with URL shortener curl -sL https://bit.ly/2F3CATp | bash
+# curl https://raw.githubusercontent.com/adytzu2007/alis/master/download.sh > download.sh
+# bash download.sh
 # ./alis-asciinema.sh
 # # Edit alis.conf and change variables values with your preferences
 # vim alis.conf
