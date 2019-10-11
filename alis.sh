@@ -112,6 +112,9 @@ function check_variables() {
     check_variables_boolean "LVM" "$LVM"
     check_variables_equals "PARTITION_ROOT_ENCRYPTION_PASSWORD" "PARTITION_ROOT_ENCRYPTION_PASSWORD_RETYPE" "$PARTITION_ROOT_ENCRYPTION_PASSWORD" "$PARTITION_ROOT_ENCRYPTION_PASSWORD_RETYPE"
     check_variables_list "FILE_SYSTEM_TYPE" "$FILE_SYSTEM_TYPE" "ext4 btrfs xfs"
+    if [ -n "$DHCP_NETWORK_INTERFACE" ]; then
+        check_variable_boolean "DHCP_NETWORK_INTERFACE_DNSSEC" "$DHCP_NETWORK_INTERFACE_DNSSEC"
+    fi
     check_variables_value "PING_HOSTNAME" "$PING_HOSTNAME"
     check_variables_value "PACMAN_MIRROR" "$PACMAN_MIRROR"
     check_variables_list "KERNELS" "$KERNELS" "linux-lts linux-lts-headers linux-hardened linux-hardened-headers linux-zen linux-zen-headers" "false"
@@ -531,7 +534,7 @@ function network() {
     
     arch-chroot /mnt systemctl enable systemd-networkd.service
     if [ -n "$DHCP_NETWORK_INTERFACE" ]; then
-    	cat <<<EOF > /mnt/etc/systemd/network/20-wired.network
+        cat <<<EOF > /mnt/etc/systemd/network/20-wired.network
 [Match]
 Name=$DHCP_NETWORK_INTERFACE
 
