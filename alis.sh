@@ -474,7 +474,7 @@ function install() {
     sed -i 's/#Color/Color/' /etc/pacman.conf
     sed -i 's/#TotalDownload/TotalDownload/' /etc/pacman.conf
 
-    pacstrap /mnt base base-devel linux
+    pacstrap /mnt base base-devel linux openssh
 
     sed -i 's/#Color/Color/' /mnt/etc/pacman.conf
     sed -i 's/#TotalDownload/TotalDownload/' /mnt/etc/pacman.conf
@@ -545,6 +545,7 @@ EOF
     fi
     
     arch-chroot /mnt systemctl enable systemd-resolved.service
+    arch-chroot /mnt systemctl enable sshd.service
     ln -sf /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 }
 
