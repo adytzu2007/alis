@@ -528,9 +528,21 @@ function network() {
     echo ""
     echo -e "${LIGHT_BLUE}# network() step${NC}"
     echo ""
+    
+    arch-chroot /mnt systemctl enable systemd-networkd.service
+    if [ -n "$DHCP_NETWORK_INTERFACE" ]; then
+    	cat <<<EOF > /mnt/etc/systemd/network/20-wired.network
+[Match]
+Name=$DHCP_NETWORK_INTERFACE
 
-    pacman_install "networkmanager"
-    arch-chroot /mnt systemctl enable NetworkManager.service
+[Network]
+DHCP=yes
+DNSSEC=$DHCP_NETWORK_INTERFACE_DNSSEC
+EOF
+    fi
+    
+    arch-chroot /mnt systemctl enable systemd-resolved.service
+    ln -sf /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 }
 
 function virtualbox() {
